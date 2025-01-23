@@ -1,6 +1,6 @@
 from os import getenv, path
 from dotenv import load_dotenv
-from .base import * # noqa
+from .base import * #noqa
 from .base import BASE_DIR
 
 local_env_file = path.join(BASE_DIR, ".envs", ".env.local")

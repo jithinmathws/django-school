@@ -152,10 +152,10 @@ LOGGING_CONFIG = None
 LOGURU_LOGGING = {
     "handlers": [
         {
-            "sink": BASE_DIR / "logs/debug.log"
-            "level": "DEBUG"
+            "sink": BASE_DIR / "logs/debug.log",
+            "level": "DEBUG",
             "filter": lambda record: record["level"].no <= logger.level("WARNING").no,
-            "format": "{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function}:{line} - {message}"
+            "format": "{time:YYYY-MM-DD HH:mm:ss:SSS} | {level: <8} | {name}:{function}:{line} - {message}",
             "rotation": "10MB",
             "retention": "30 days",
             "compression": "zip",
@@ -169,8 +169,8 @@ LOGURU_LOGGING = {
             "compression": "zip",
             "backtrace": True,
             "diagnose": True,
-         },
-    ]   ,
+         }
+    ],
 }
 logger.configure(**LOGURU_LOGGING)
 
