@@ -30,19 +30,19 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "django_countries",
-    "phonenumber_field",
+    
     "drf_spectacular",
     "djoser",
     "cloudinary",
     "django_filters",
     "djcelery_email",
     "django_celery_beat",
-]
+]#"phonenumber_field",
 
 LOCAL_APPS = [
-    "core_apps.user_auth",
-    "core_apps.common",
-    "core_apps.user_profile",
+    # "core_apps.user_auth",
+    # "core_apps.common",
+    # "core_apps.user_profile",
 
 ]
 
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'school.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(APPS_DIR) / "templates"],
+        'DIRS': [str(APPS_DIR / "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
