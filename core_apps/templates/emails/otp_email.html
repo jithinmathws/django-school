@@ -1,0 +1,33 @@
+<!-- Template for One-Time Password (OTP) email notification -->
+<!-- Extends the base email template which contains the common email styling and structure -->
+{% extends 'emails/base.html' %}
+
+<!-- Email subject/title block -->
+{% block title %}
+    Your Login OTP
+{% endblock title %}    
+
+<!-- Main email content block -->
+{% block content %}
+    <!-- Main heading for the OTP email -->
+    <h2>
+        Your One Time Password
+    </h2>
+    <!-- Display the OTP code -->
+    <p>
+        Your OTP is <strong>{{ otp }}</strong>
+    </p>
+    <!-- OTP validity duration -->
+    <p>
+        This OTP is valid for <strong>{{ otp_duration }} minutes.</strong>
+    </p>
+    <!-- Security disclaimer -->
+    <p>
+        If you didn't request this, please ignore this email.
+    </p>
+    <!-- Email signature -->
+    <p>
+        Best regards,<br>
+        <strong>{{ site_name }}</strong>
+    </p>
+{% endblock content %}

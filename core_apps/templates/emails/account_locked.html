@@ -1,0 +1,30 @@
+<!-- Template for account locked notification email -->
+<!-- Extends the base email template which contains the common email styling and structure -->
+{% extends 'emails/base.html' %}
+
+<!-- Email subject/title block -->
+{% block title %}
+    Account Locked
+{% endblock title %}
+
+<!-- Main email content block -->
+{% block content %}
+    <!-- Main heading for the email -->
+    <h2>
+        Your account has been locked.
+    </h2>
+    <!-- Personalized message with lockout duration -->
+    <p>
+        {{ user.full_name }}, your account has been locked due to too many failed login attempts. For
+        security reasons, you won't be able to log in for the next <b> {{ lockout_duration }} </b> minutes.
+    </p>
+    <!-- Support information -->
+    <p>
+        If you think this is a mistake, please contact the site administrator.
+    </p>
+    <!-- Email signature -->
+    <p>
+        Best regards,<br>
+        <strong>{{ site_name }}</strong>
+    </p>
+{% endblock content %}
