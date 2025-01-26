@@ -25,6 +25,7 @@ django-celery-beat==2.7.0
 django-celery-email==3.0.0
 django-countries==7.6.1
 django-filter==24.3
+django-phonenumber-field==8.0.0
 django-phonenumbers==1.0.1
 django-redis==5.4.0
 django-timezone-field==7.1
@@ -45,6 +46,7 @@ oauthlib==3.2.2
 packaging==24.2
 pathspec==0.12.1
 phonenumbers==8.13.53
+phonenumberslite==8.13.53
 pillow==11.1.0
 platformdirs==4.3.6
 prometheus_client==0.21.1
