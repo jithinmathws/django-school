@@ -199,6 +199,16 @@ cloudinary.config(
     api_secret=CLOUDINARY_API_SECRET,
 )
 
+COOKIE_NAME = "access"
+
+COOKIE_SAMESITE = "Lax"
+
+COOKIE_PATH = "/"
+
+COOKIE_HTTPONLY = True
+
+COOKIE_SECURE = getenv("COOKIE_SECURE", "True") == "True"
+
 LOGGING_CONFIG = None
 
 LOGURU_LOGGING = {
