@@ -82,7 +82,7 @@ class ProfileAdmin(admin.ModelAdmin):
         ),
         (
             _("Identification Information"),
-            {"fields": ("identification_number", "identification_means")},
+            {"fields": ("identification_number",)},
         ),
     )
 
