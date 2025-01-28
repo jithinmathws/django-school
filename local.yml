@@ -94,6 +94,20 @@ services:
     networks:
       - inter_school_local_nw
   
+  client:
+    build:
+      context: ./client/
+      dockerfile: ./docker/local/Dockerfile
+    container_name: school_client
+    image: school_client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    networks:
+      - inter_school_local_nw
+
   nginx:
     build:
       context: ./docker/local/nginx/
