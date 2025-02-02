@@ -8,7 +8,7 @@ class GenericJSONRenderer(JSONRenderer):
     charset = 'utf-8'
     object_label = 'object'
 
-    def render(self, data: Any, accepted_media_type: Optional[str] = None, renderer_context: Optional[str] = None) -> Union[bytes, str]:
+    def render(self, data: Any, accepted_media_type: Optional[str] = None, renderer_context: Optional[dict] = None) -> Union[bytes, str]:
         if renderer_context is not None:
             renderer_context = {}
 

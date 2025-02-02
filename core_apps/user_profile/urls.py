@@ -1,7 +1,9 @@
 from django.urls import path
 from .views import *
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path('all/', ProfileListAPIView.as_view(), name='all_profiles'),
-    path('my-profile/', ProfileDetailAPIView.as_view(), name='profile_detail'),
-]
+router = DefaultRouter()
+router.register("all-profiles/", ProfileViewSet, basename="profile")
+router.register("my-profile/", ProfileDetailViewSet, basename="profile-detail")
+
+urlpatterns = router.urls

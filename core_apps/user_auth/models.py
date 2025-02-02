@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from autoslug import AutoSlugField
 
 # Local imports
 from .emails import send_account_locked_email
@@ -127,6 +128,13 @@ class User(AbstractUser):
         choices=RoleChoices.choices,
         default=RoleChoices.STUDENT,
         help_text=_("User's role in the school system")
+    )
+
+    slug = AutoSlugField(
+        populate_from="username",
+        unique=True,
+        always_update=True,
+        help_text=_("Unique slug for the user")
     )
     
     # Login security fields
