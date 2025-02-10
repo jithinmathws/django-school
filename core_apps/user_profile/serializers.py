@@ -48,6 +48,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             "middle_name",
             "last_name",
             "username",
+            "slug",
             "email",
             "full_name",
             "id_no",
@@ -68,6 +69,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "id",
             "username",
+            "slug",
             "email",
             "created_at",
             "updated_at",

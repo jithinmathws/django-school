@@ -78,7 +78,7 @@ class UserManager(DjangoUserManager):
             ValueError: If email or password is not provided
         """
         if not email:
-            raise ValueError(_("The given email must be provided"))
+            raise ValueError(_("The email must be provided"))
         
         if not password:
             raise ValueError(_("A password must be provided"))

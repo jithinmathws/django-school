@@ -9,6 +9,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_countries.fields import CountryField
 #from phonenumber_field.modelfields import PhoneNumberField
+from autoslug import AutoSlugField
 from django.utils import timezone
 
 from core_apps.common.models import TimestampedModel
@@ -38,7 +39,7 @@ class Profile(TimestampedModel):
         MR = ("mr", _("Mr"),)
         MRS = ("mrs", _("Mrs"),)
         MISS = ("miss", _("Miss"),)
-        MASTER = ("master", _("Master"),)
+        NONE = ("none", _("None"),)
 
     class Gender(models.TextChoices):
         """Available gender options"""
@@ -72,11 +73,16 @@ class Profile(TimestampedModel):
         HOUSEWIFE = ("housewife", _("Housewife"),)
         OTHER = ("other", _("Other"),)
 
+    '''class OtherRoles(models.TextChoices):
+        """Available other roles for users"""
+        ACCOUNTANT = ("accountant", _("Accountant"),)
+        STUDENT = ("student", _("Student"),)'''
+
     # User Reference
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
 
     # Personal Information
-    title = models.CharField(_("Salutation"), choices=Salutation.choices, max_length=8, default=Salutation.MASTER)
+    title = models.CharField(_("Salutation"), choices=Salutation.choices, max_length=8, default=Salutation.NONE)
     gender = models.CharField(_("Gender"), choices=Gender.choices, max_length=8, default=Gender.MALE)
     date_of_birth = models.DateField(_("Date of Birth"), default=settings.DEFAULT_BIRTH_DATE)
     country_of_birth = CountryField(_("Country of Birth"), default=settings.DEFAULT_COUNTRY)

@@ -45,6 +45,9 @@ LOCAL_APPS = [
     "core_apps.user_auth",
     "core_apps.common",
     "core_apps.user_profile",
+    "core_apps.teacher_profile",
+    "core_apps.academics",
+    "core_apps.administration",
 
 ]
 
@@ -201,6 +204,7 @@ DJOSER = {
     "PASSWORD_RESET_CONFIRM_URL": "password-reset/{uid}/{token}",
     "SERIALIZERS": {
         "user_create": "core_apps.user_auth.serializers.UserCreateSerializer",
+        "user": "core_apps.user_auth.serializers.CustomUserSerializer",
     },
 }
 

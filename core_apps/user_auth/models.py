@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from autoslug import AutoSlugField
 
 # Local imports
 from .emails import send_account_locked_email
@@ -37,9 +38,11 @@ class User(AbstractUser):
         
         ACTIVE: Normal functioning account with full access
         LOCKED: Account temporarily disabled due to security concerns (e.g., multiple failed login attempts)
+        INACTIVE: Account disabled by the user or administrator, no access allowed
         """
         ACTIVE = "ACTIVE", _("Active")
         LOCKED = "LOCKED", _("Locked")
+        INACTIVE = "INACTIVE", _("Inactive")
 
     class RoleChoices(models.TextChoices):
         """
@@ -125,8 +128,17 @@ class User(AbstractUser):
         _("role"),
         max_length=20,
         choices=RoleChoices.choices,
-        default=RoleChoices.STUDENT,
+        default=None,
+        null=True,
+        blank=True,
         help_text=_("User's role in the school system")
+    )
+
+    slug = AutoSlugField(
+        populate_from="username",
+        unique=True,
+        always_update=True,
+        help_text=_("Unique slug for the user")
     )
     
     # Login security fields
