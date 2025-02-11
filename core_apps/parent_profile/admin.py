@@ -84,10 +84,7 @@ class ProfileAdmin(admin.ModelAdmin):
             _("Employment Information"),
             {
                 "fields": (
-                    "designation",
-                    "salary",
-                    "unpaid_salary",
-                    "subjects",
+                    "employment_status",
                 )
             },
         ),
@@ -95,10 +92,7 @@ class ProfileAdmin(admin.ModelAdmin):
             _("Identification Information"),
             {"fields": ("identification_number",)},
         ),
-        (
-            _("Verification Information"),
-            {"fields": ("verification_notes", "verification_date", "fully_activated")},
-        ),
+        
     )
 
     def full_name(self, obj) -> str:
