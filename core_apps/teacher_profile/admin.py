@@ -93,7 +93,17 @@ class ProfileAdmin(admin.ModelAdmin):
         ),
         (
             _("Identification Information"),
-            {"fields": ("identification_number",)},
+            {"fields": ("identification_number", "nationality")},
+        ),
+        (
+            _("Experience Information"),
+            {
+                "fields": (
+                    "experience_status",
+                    "previous_employer",
+                    "year_of_experience",
+                )
+            },
         ),
         (
             _("Verification Information"),
