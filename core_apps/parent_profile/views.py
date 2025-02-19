@@ -28,7 +28,7 @@ class ProfileViewSet(generics.ListCreateAPIView):
     renderer_classes = [GenericJSONRenderer]
     pagination_class = StandardResultsSetPagination
     object_label = "profiles"
-    permission_classes = [IsTeacher]
+    permission_classes = [IsParent]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     search_fields = ['user__first_name', 'user__last_name', 'user__id_no']
     filterset_fields = ['user__first_name', 'user__last_name', 'user__id_no']

@@ -1,5 +1,6 @@
 from typing import Any, List
 
+from django.db import transaction
 from django.contrib.contenttypes.models import ContentType
 from django.http import Http404
 from django.shortcuts import get_object_or_404
@@ -86,12 +87,21 @@ class ProfileDetailViewSet(generics.RetrieveUpdateAPIView):
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
         try:
             serializer.is_valid(raise_exception=True)
-            self.perform_update(serializer)
+            with transaction.atomic():
+                upadated_instance = serializer.save()
+
+                return Response(
+                    {
+                        "message": "Profile updated successfully",
+                        "data": serializer.data,
+                    },
+                    status=status.HTTP_200_OK
+                )
         except serializers.ValidationError as e:
             return Response({"errors": e.detail}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response({"errors": str(e)}, status=status.HTTP_400_BAD_REQUEST)
-        return Response(serializer.data)
+        
 
     def partial_update(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         kwargs['partial'] = True

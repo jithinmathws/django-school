@@ -1,0 +1,21 @@
+{% extends 'emails/base.html' %}
+
+{% block title %}
+    Account Created
+{% endblock %}
+
+{% block content %}
+    <h2>Welcome to {{ site_name }}</h2>
+    <p>Dear {{ user.full_name }},</p>
+    <p>We are excited to inform you that your account has been created.</p>
+    <p>Here is a summary of your account details:</p>
+    <ul>
+        <li><strong>Your username is: {{ user.username }}</strong></li>
+        <li><strong>Your security question is: {{ user.security_question }}</strong></li>
+        <li><strong>Your answer to the security question is: {{ user.security_answer }}</strong></li>
+
+    </ul>
+    <p>Please keep this email for your records.</p>
+    <p>Thank you for choosing us! <strong>{{ site_name }}</strong></p>
+    
+{% endblock %}
