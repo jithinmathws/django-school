@@ -14,3 +14,30 @@ class SubjectAdmin(admin.ModelAdmin):
     search_fields = ["name", "subject_code"]
     list_filter = ["department"]
     ordering = ["department", "name"]
+
+@admin.register(ClassName)
+class ClassNameAdmin(admin.ModelAdmin):
+    list_display = ["name"]
+    list_display_links = ["name"]
+    search_fields = ["name"]
+
+@admin.register(ClassYear)
+class ClassYearAdmin(admin.ModelAdmin):
+    list_display = ["year", "full_name"]
+    list_display_links = ["year"]
+    search_fields = ["year", "full_name"]
+    ordering = ["-year"]
+
+@admin.register(ReasonLeft)
+class ReasonLeftAdmin(admin.ModelAdmin):
+    list_display = ["reason"]
+    list_display_links = ["reason"]
+    search_fields = ["reason"]
+
+@admin.register(ClassRoom)
+class ClassRoomAdmin(admin.ModelAdmin):
+    list_display = ["name"]
+    list_display_links = ["name"]
+    search_fields = ["name"]
+    list_filter = ["class_name"]
+    ordering = ["class_name", "name"]
