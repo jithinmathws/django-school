@@ -69,9 +69,9 @@ class ReasonLeft(TimestampedModel):
 
 class ClassRoom(TimestampedModel):
     name = models.ForeignKey(
-        ClassLevel, on_delete=models.CASCADE, blank=True, related_name="class_level"
+        ClassName, on_delete=models.CASCADE, blank=True, related_name="class_name"
     )
-    class_teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, blank=True)
+    class_teacher = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     capacity = models.PositiveIntegerField(default=40, blank=True)
     occupied_sits = models.PositiveIntegerField(default=0, blank=True)
 
@@ -81,7 +81,7 @@ class ClassRoom(TimestampedModel):
         ]
 
     def __str__(self):
-        return f"{self.name} {self.stream}" if self.stream else str(self.name)
+        return f"{self.name}"
 
     @property
     def available_sits(self):

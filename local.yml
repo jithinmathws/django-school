@@ -18,6 +18,7 @@ services:
       - redis
       - rabbitmq
     command: /start.sh
+    #docker network created named inter_school_local_nw
     networks:
       - inter_school_local_nw
 

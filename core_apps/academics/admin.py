@@ -36,8 +36,8 @@ class ReasonLeftAdmin(admin.ModelAdmin):
 
 @admin.register(ClassRoom)
 class ClassRoomAdmin(admin.ModelAdmin):
-    list_display = ["name"]
+    list_display = ["name", "class_teacher", "capacity", "occupied_sits"]
     list_display_links = ["name"]
-    search_fields = ["name"]
-    list_filter = ["class_name"]
-    ordering = ["class_name", "name"]
+    search_fields = ["name", "class_teacher"]
+    list_filter = ["class_teacher", "name"]
+    ordering = ["class_teacher", "name", "capacity"]
