@@ -42,16 +42,14 @@ class Subject(TimestampedModel):
         super().save(*args, **kwargs)
 
 class ClassName(TimestampedModel):
-    name = models.CharField(max_length=150, unique=True)
+    name = models.CharField(_("Class Name"), max_length=150, unique=True)
 
     def __str__(self):
         return self.name
 
 class ClassYear(TimestampedModel):
-    year = models.CharField(max_length=100, unique=True, help_text="Example 2020")
-    full_name = models.CharField(
-        max_length=255, help_text="Example Class_of_2020", blank=True
-    )
+    year = models.CharField(_("Class Year"),max_length=100, unique=True, help_text="Example 2020")
+    full_name = models.CharField(_("Full Name"), max_length=255, help_text="Example Class_of_2020", blank=True, null=True)
 
     def __str__(self):
         return self.full_name
@@ -62,7 +60,7 @@ class ClassYear(TimestampedModel):
         super().save(*args, **kwargs)
 
 class ReasonLeft(TimestampedModel):
-    reason = models.CharField(max_length=255, unique=True)
+    reason = models.CharField(_("Reason for Leaving"), max_length=255, unique=True)
 
     def __str__(self):
         return self.reason
@@ -72,8 +70,8 @@ class ClassRoom(TimestampedModel):
         ClassName, on_delete=models.CASCADE, blank=True, related_name="class_name"
     )
     class_teacher = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    capacity = models.PositiveIntegerField(default=40, blank=True)
-    occupied_sits = models.PositiveIntegerField(default=0, blank=True)
+    capacity = models.PositiveIntegerField(_("Capacity"), default=40, blank=True)
+    occupied_seats = models.PositiveIntegerField(_("Occupied Seats"), default=0, blank=True)
 
     class Meta:
         constraints = [
@@ -85,16 +83,16 @@ class ClassRoom(TimestampedModel):
 
     @property
     def available_sits(self):
-        return self.capacity - self.occupied_sits
+        return self.capacity - self.occupied_seats
 
     @property
     def class_status(self):
-        percentage = (self.occupied_sits / self.capacity) * 100
+        percentage = (self.occupied_seats / self.capacity) * 100
         return f"{percentage:.2f}%"
 
     def clean(self):
-        if self.occupied_sits > self.capacity:
-            raise ValidationError("Occupied sits cannot exceed the capacity.")
+        if self.occupied_seats > self.capacity:
+            raise ValidationError("Occupied seats cannot exceed the capacity.")
 
     def save(self, *args, **kwargs):
 
