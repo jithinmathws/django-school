@@ -78,6 +78,7 @@ class Profile(TimestampedModel):
 
     # User Reference
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    slug = models.SlugField(max_length=55, unique=True)
 
     # Personal Information
     title = models.CharField(_("Salutation"), choices=Salutation.choices, max_length=8, default=Salutation.NONE)

@@ -11,8 +11,8 @@ User = get_user_model()
 
 class Article(TimestampedModel):
     """Model representing an article with title, content, and associated media."""
-    title = models.CharField(max_length=155, blank=True, null=True)
-    content = models.TextField(blank=True, null=True)
+    title = models.CharField(_("Title"), max_length=155, blank=True, null=True)
+    content = models.TextField(_("Content"), blank=True, null=True)
     picture = CloudinaryField(_("Photo"), blank=True, null=True)
     picture_url = models.URLField(_("Photo URL"), blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, null=True)
@@ -25,8 +25,8 @@ class Article(TimestampedModel):
         verbose_name_plural = _("Articles")
 
 class CarouselImage(TimestampedModel):
-    title = models.CharField(max_length=155, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
+    title = models.CharField(_("Title"), max_length=155, blank=True, null=True)
+    description = models.TextField(_("Description"), blank=True, null=True)
     picture = CloudinaryField(_("Photo"), blank=True, null=True)
     picture_url = models.URLField(_("Photo URL"), blank=True, null=True)
     
@@ -39,9 +39,10 @@ class CarouselImage(TimestampedModel):
 
 class School(TimestampedModel):
     active = models.BooleanField(default=False, help_text="This will be used to activate or deactivate the school")
-    name = models.CharField(max_length=255, help_text="Name of the school")
-    address = models.CharField(max_length=255, help_text="Address of the school")
+    name = models.CharField(_("School Name"), max_length=255, help_text="Name of the school")
+    address = models.CharField(_("Address"), max_length=255, help_text="Address of the school")
     school_type = models.CharField(
+        _("School Type"),
         max_length=50,
         choices=SCHOOL_TYPE_CHOICE, # Choices for different types of schools
         blank=True,
@@ -49,6 +50,7 @@ class School(TimestampedModel):
         help_text="Type of school",
     )
     gender_allowed = models.CharField(
+        _("Gender Allowed"),
         max_length=50,
         choices=SCHOOL_STUDENTS_GENDER, # Choices for gender of students allowed
         blank=True,
@@ -56,16 +58,17 @@ class School(TimestampedModel):
         help_text="Gender of students allowed",
     )
     ownership = models.CharField(
+        _("Ownership"),
         max_length=50,
         choices=SCHOOL_OWNERSHIP,  # Choices for ownership of school
         blank=True,
         null=True,
         help_text="Ownership of school",
     )
-    mission = models.TextField(blank=True, null=True, help_text="Mission of the school")
-    vision = models.TextField(blank=True, null=True, help_text="Vision of the school")
-    telephone = models.CharField(max_length=20, blank=True, null=True, help_text="Telephone number of the school")
-    email = models.EmailField(blank=True, null=True, help_text="Email of the school")
+    mission = models.TextField(_("Mission"), blank=True, null=True, help_text="Mission of the school")
+    vision = models.TextField(_("Vision"), blank=True, null=True, help_text="Vision of the school")
+    telephone = models.CharField(_("Telephone"), max_length=20, blank=True, null=True, help_text="Telephone number of the school")
+    email = models.EmailField(_("Email"), blank=True, null=True, help_text="Email of the school")
     school_logo = CloudinaryField(_("School Logo"), blank=True, null=True)
     school_logo_url = models.URLField(_("School Logo URL"), blank=True, null=True)
     
@@ -106,7 +109,7 @@ class Day(TimestampedModel):
         verbose_name_plural = _("Days")
 
 class AcademicYear(TimestampedModel):
-    name = models.CharField(max_length=255, unique=True, help_text="Name of the academic year (e.g. 2024-2025)")
+    name = models.CharField(_("Name"), max_length=255, unique=True, help_text="Name of the academic year (e.g. 2024-2025)")
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     student_completion = models.DateField(blank=True, null=True, help_text="Date of student completion")
@@ -142,7 +145,7 @@ class AcademicYear(TimestampedModel):
         super().clean()
 
 class Term(TimestampedModel):
-    name = models.CharField(max_length=50)
+    name = models.CharField(_("Name"), max_length=50, help_text="If in term1, term2, term3, etc.")
     academic_year = models.ForeignKey(AcademicYear, on_delete=models.CASCADE, related_name="terms")
     default_term_fee = models.DecimalField(
         max_digits=10,
